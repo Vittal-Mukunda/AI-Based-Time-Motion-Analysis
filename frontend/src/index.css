@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   KINETIC ANALYTICS - EXECUTIVE THEME
+   ============================================ */
+
+:root {
+  /* Executive Palette */
+  --exec-bg: #0d1b2a;
+  --exec-card: #112233;
+  --exec-border: #1e3a5f;
+  --exec-blue: #1e90ff;
+  --exec-accent: #00d4ff;
+  
+  /* Legacy colors for compatibility */
+  --cyber-cyan: #00FFFF;
+  --cyber-magenta: #FF00FF;
+  --cyber-green: #00FF88;
+  --cyber-yellow: #FFD700;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--exec-bg);
+  color: #e0e0e0;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--exec-card);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--exec-blue);
+  border-radius: 3px;
+}
+
+/* Card Styling */
+.cyber-card,
+.exec-card {
+  background: linear-gradient(135deg, #0f1f2e 0%, #112233 100%);
+  border: 1px solid var(--exec-border);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.cyber-card:hover,
+.exec-card:hover {
+  border-color: var(--exec-blue);
+  box-shadow: 0 0 20px rgba(30, 144, 255, 0.15);
+}
+
+/* Tab Navigation */
+.tab-nav {
+  background: var(--exec-card);
+  border-bottom: 1px solid var(--exec-border);
+}
+
+.tab-button {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.tab-button:hover {
+  background: rgba(30, 144, 255, 0.1);
+}
+
+/* State Colors */
+.state-operation {
+  color: var(--cyber-green);
+  border-color: var(--cyber-green);
+}
+
+.state-transport {
+  color: var(--cyber-yellow);
+  border-color: var(--cyber-yellow);
+}
+
+.state-delay {
+  color: #64748b;
+  border-color: #64748b;
+}
+
+/* Connection Status */
+.status-connected {
+  background: var(--cyber-green);
+  box-shadow: 0 0 8px var(--cyber-green);
+}
+
+.status-disconnected {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+}
+
+/* Canvas Container */
+.canvas-container {
+  position: relative;
+  background: #000;
+  border: 1px solid var(--exec-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* View Transitions */
+.view-transition {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Progress Bar */
+.progress-bar {
+  background: linear-gradient(90deg, var(--exec-blue), var(--exec-accent));
+  transition: width 0.3s ease;
+}
+
+/* Neon effects (for skeleton views) */
+.neon-cyan {
+  text-shadow: 0 0 8px var(--cyber-cyan);
+}
+
+.neon-green {
+  text-shadow: 0 0 8px var(--cyber-green);
+}
+
+/* Utility classes */
+.bg-exec-bg { background-color: var(--exec-bg); }
+.bg-exec-card { background-color: var(--exec-card); }
+.border-exec-border { border-color: var(--exec-border); }
+.text-exec-blue { color: var(--exec-blue); }
+.bg-exec-blue { background-color: var(--exec-blue); }
+
+.text-cyber-cyan { color: var(--cyber-cyan); }
+.text-cyber-green { color: var(--cyber-green); }
+.text-cyber-yellow { color: var(--cyber-yellow); }
+.text-cyber-gray { color: #64748b; }
+.bg-cyber-bg { background-color: var(--exec-bg); }
+.bg-cyber-green\/20 { background-color: rgba(0, 255, 136, 0.2); }
+.bg-cyber-yellow\/20 { background-color: rgba(255, 215, 0, 0.2); }
+.bg-cyber-gray\/20 { background-color: rgba(100, 116, 139, 0.2); }
+.border-cyber-green { border-color: var(--cyber-green); }
+.border-cyber-yellow { border-color: var(--cyber-yellow); }
+.border-cyber-gray { border-color: #64748b; }
+.bg-cyber-green { background-color: var(--cyber-green); }
+.bg-cyber-yellow { background-color: var(--cyber-yellow); }
+.bg-cyber-gray { background-color: #64748b; }
