@@ -15,10 +15,16 @@ class RobustDataLogger:
     
     def __init__(self, file_path: Optional[str] = None):
         if file_path is None:
-            file_path = r"C:\Users\vitta\OneDrive\Desktop\Python 3.10\AI-Based-Time-Motion-Analysis\Master_Raw_Data.csv"
-        
+            # Default: project root / Master_Raw_Data.csv
+            _project_root = os.path.dirname(
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            )
+            file_path = os.path.join(_project_root, "Master_Raw_Data.csv")
+
         self.file_path = file_path
-        os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
+        _dir = os.path.dirname(self.file_path)
+        if _dir:
+            os.makedirs(_dir, exist_ok=True)
         
         self.session_id = datetime.now().strftime("%Y%m%d_%H%M%S")
         self.last_log_time = -1.0

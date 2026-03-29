@@ -2,7 +2,7 @@
 
 import asyncio
 import json
-from typing import List, Dict, Any, Set
+from typing import Dict, Any, List, Optional, Set
 from fastapi import WebSocket
 
 
@@ -57,11 +57,11 @@ def create_broadcast_payload(
     frame_id: int,
     video_time: float,
     fps: float,
-    board_box: List[int] | None,
+    board_box: Optional[List[int]],
     hands_info: Dict[str, Any],
     counters: Dict[str, float],
-    alerts: List[str] = None,
-    image: str = None
+    alerts: Optional[List[str]] = None,
+    image: Optional[str] = None
 ) -> Dict[str, Any]:
     """
     Create the JSON payload to broadcast to clients.

@@ -69,13 +69,16 @@ class ProcessStateMachine:
             state.board_entry_time = video_time if candidate else None
         
         # Determine final state
+        # NOTE: use `is not None` — timestamps can legitimately be 0.0 (falsy)
         new_process = "Transport"
-        
-        if state.stationary_start_time and (video_time - state.stationary_start_time > config.DELAY_INACTIVITY_TIME):
+
+        if (state.stationary_start_time is not None and
+                video_time - state.stationary_start_time > config.DELAY_INACTIVITY_TIME):
             new_process = "Delay"
-        elif state.target_state_candidate == "Operation" and state.board_entry_time:
-            if (video_time - state.board_entry_time > config.ZONE_STABILITY_TIME):
-                new_process = "Operation"
+        elif (state.target_state_candidate == "Operation" and
+              state.board_entry_time is not None and
+              video_time - state.board_entry_time > config.ZONE_STABILITY_TIME):
+            new_process = "Operation"
         
         state.current_process = new_process
         return new_process

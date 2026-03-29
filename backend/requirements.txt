@@ -1,8 +1,33 @@
-fastapi>=0.104.0
-uvicorn[standard]>=0.24.0
+# Kinetic Analytics V2.0 — Backend Dependencies
+# Python 3.9+ required (3.10+ recommended)
+#
+# Install:
+#   pip install -r requirements.txt
+#
+# GPU acceleration (optional, requires CUDA 11.8+):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+
+# ── Web framework ─────────────────────────────────────────────────────────────
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
 websockets>=12.0
-opencv-python>=4.8.0
-mediapipe>=0.10.0
-ultralytics>=8.0.0
-torch>=2.0.0
-numpy>=1.24.0
+
+# ── Computer vision & AI ──────────────────────────────────────────────────────
+opencv-python>=4.9.0
+mediapipe>=0.10.14
+ultralytics>=8.2.0
+
+# ── Deep learning (CPU build; swap for CUDA build if GPU is available) ────────
+torch>=2.2.0
+torchvision>=0.17.0
+
+# ── Numerical computing ───────────────────────────────────────────────────────
+numpy>=1.26.0
+
+# ── Configuration ─────────────────────────────────────────────────────────────
+python-dotenv>=1.0.0
+
+# ── Testing ───────────────────────────────────────────────────────────────────
+pytest>=8.1.0
+pytest-asyncio>=0.23.0
+httpx>=0.27.0

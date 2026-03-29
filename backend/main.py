@@ -4,6 +4,7 @@ Real-time hand tracking with WebSocket broadcasting
 """
 
 import asyncio
+import os
 import time
 from collections import deque
 from contextlib import asynccontextmanager
@@ -12,23 +13,26 @@ from typing import Dict
 import numpy as np
 import cv2
 import base64
+from dotenv import load_dotenv
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
 from core import (
-    config, HandTracker, ProcessStateMachine, 
+    config, HandTracker, ProcessStateMachine,
     BoardDetector, VideoCapture, RobustDataLogger
 )
 from services import ConnectionManager, create_broadcast_payload
 
+# Load environment variables from .env file (if present)
+load_dotenv()
 
 # ============================================================================
 # CONFIGURATION
 # ============================================================================
 
-# Use raw strings (r"...") to handle Windows backslashes correctly
-MODEL_PATH = r"C:\Users\vitta\OneDrive\Desktop\Python 3.10\runs\detect\My_Custom_Training\board_detector_gpu\weights\best.pt"
-VIDEO_PATH = r"C:\Users\vitta\OneDrive\Desktop\WSD Video.mp4"
+# Override via environment variables — see backend/.env.example
+MODEL_PATH = os.getenv("MODEL_PATH", "")
+VIDEO_PATH = os.getenv("VIDEO_PATH", "0")  # "0" falls back to webcam index 0
 
 # ============================================================================
 # GLOBAL STATE
@@ -63,7 +67,14 @@ app_state = AppState()
 async def processing_loop():
     """Main video processing loop running in background."""
     print("[LOOP] Starting processing loop...")
-    
+
+    if not MODEL_PATH:
+        print("[ERROR] MODEL_PATH is not set. Create a backend/.env file with MODEL_PATH=<path/to/best.pt>")
+        return
+    if not os.path.isfile(MODEL_PATH):
+        print(f"[ERROR] YOLO model not found at: {MODEL_PATH}")
+        return
+
     try:
         app_state.video = VideoCapture(VIDEO_PATH)
         app_state.detector = BoardDetector(MODEL_PATH)
